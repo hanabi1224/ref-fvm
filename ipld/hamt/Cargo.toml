@@ -15,8 +15,8 @@ multihash-codetable = { workspace = true }
 thiserror = { workspace = true }
 once_cell = { workspace = true }
 anyhow = { workspace = true }
-fvm_ipld_encoding = { workspace = true }
-fvm_ipld_blockstore = { workspace = true }
+fvm_ipld_encoding = "0.5"
+fvm_ipld_blockstore = "0.3"
 sha2 = "0.10"
 forest_hash_utils = "0.1"
 ipld-core = { workspace = true }
