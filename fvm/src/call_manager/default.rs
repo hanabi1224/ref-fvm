@@ -786,6 +786,15 @@ where
                 let mut out = [wasmtime::Val::I32(0)];
                 let res = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                     func.call(&mut store, params.as_slice(), &mut out)
+                        .inspect_err(|e| {
+                            if let Some(Abort::Exit(code, reason, block)) =
+                                e.downcast_ref::<Abort>()
+                            {
+                                log::warn!(
+                                    "func.call error code: {code}, reason: {reason}, block: {block}"
+                                );
+                            }
+                        })
                 }))
                 .map_err(|panic| Abort::Fatal(anyhow!("panic within actor: {:?}", panic)))?;
 
